@@ -1,12 +1,12 @@
 .nav {
     grid-area: n;
-    background-color: burlywood;
 }
 
 .item {
-    color: #fff;
+    color: rgba(100, 100, 100, .9);
 }
 
 .item.active {
     font-size: 20px;
+    color: hsl(210, 50%, 50%);
 }

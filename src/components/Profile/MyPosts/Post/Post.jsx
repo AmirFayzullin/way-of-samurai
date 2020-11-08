@@ -7,7 +7,7 @@ const Post = (props) => {
             <img src="https://static.toiimg.com/photo/72975551.cms" alt="avatar"/>
             {props.message}
             <div>
-                <span>Like</span>
+                <span>Like</span> {props.likesCount}
             </div>
         </div>
     );
