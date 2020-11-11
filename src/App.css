@@ -1,12 +1,12 @@
 .app-wrapper {
     display: grid;
-    width: 1200px;
+    width: 90vw;
     margin: 10px auto;
     grid-gap: 10px;
     grid-template: 60px 1fr / 2fr 10fr;
     grid-template-areas:
         'h h'
-        'n c';
+        's c';
 }
 
 .app-wrapper > *:nth-child(1),

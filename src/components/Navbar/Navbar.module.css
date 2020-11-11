@@ -1,6 +1,12 @@
-.nav {
-    grid-area: n;
+.sidebar {
+    grid-area: s;
     padding: 20px;
+    display: grid;
+    grid-gap: 10px;
+}
+
+.nav {
+
 }
 
 .item a {

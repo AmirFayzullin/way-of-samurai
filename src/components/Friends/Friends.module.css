@@ -1,0 +1,16 @@
+.friendsBar {
+    overflow: hidden;
+}
+
+.friendsBarTitle {
+    font-size: 1.3rem;
+    color: rgba(100, 100, 100, .9);
+}
+
+.friends {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-gap: 10px;
+    overflow-x: auto;
+}
