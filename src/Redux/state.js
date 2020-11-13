@@ -34,4 +34,18 @@ let state = {
     },
 };
 
+let addPost = (postMessage) => {
+    let newPost = {
+        id: Math.random() * Math.pow(10, 10),
+        message: postMessage,
+        likesCount: 0,
+    };
+
+    state.profilePage.posts.unshift(newPost);
+};
+
+export let dataManager = {
+    addPost: addPost,
+};
+
 export default state;

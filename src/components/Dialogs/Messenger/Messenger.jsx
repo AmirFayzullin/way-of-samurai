@@ -21,7 +21,7 @@ const Messenger = (props) => {
                           ref={newMessageElement}
                 >
                 </textarea>
-                
+
                 <button className={s.newMessageSend}
                         onClick={onSendMessage}
                 >
