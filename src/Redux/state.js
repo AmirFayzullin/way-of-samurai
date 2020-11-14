@@ -14,6 +14,7 @@ let state = {
                 likesCount: 12
             }
         ],
+        newPostText: "",
     },
     dialogsPage: {
         dialogs: [
@@ -36,19 +37,26 @@ let state = {
     },
 };
 
-let addPost = (postMessage) => {
+let addPost = () => {
     let newPost = {
         id: Math.random() * Math.pow(10, 10),
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0,
     };
 
     state.profilePage.posts.unshift(newPost);
+    state.profilePage.newPostText = "";
+    rerenderEntireTree(state);
+};
+
+let updateNewPostText = (newPostText) => {
+    state.profilePage.newPostText = newPostText;
     rerenderEntireTree(state);
 };
 
 export let dataManager = {
     addPost: addPost,
+    updateNewPostText: updateNewPostText,
 };
 
 export default state;

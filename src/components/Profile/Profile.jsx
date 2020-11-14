@@ -7,6 +7,7 @@ const Profile = (props) => {
         <div>
             <ProfileInfo />
             <MyPosts posts={props.state.posts}
+                     newPostText={props.state.newPostText}
                      dataManager={props.dataManager}
             />
         </div>
