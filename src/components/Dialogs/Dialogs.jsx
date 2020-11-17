@@ -5,14 +5,16 @@ import Messenger from "./Messenger/Messenger";
 
 const Dialogs = (props) => {
 
-    let dialogsElements = props.state.dialogs.map(d => <DialogItem state={d}/>);
+    let dialogsElements = props.state.dialogsPage.dialogs.map(d => <DialogItem state={d}/>);
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
                 {dialogsElements}
             </div>
-            <Messenger state={props.state.messages}/>
+            <Messenger state={props.state}
+                       store={props.store}
+            />
         </div>
     )
 };

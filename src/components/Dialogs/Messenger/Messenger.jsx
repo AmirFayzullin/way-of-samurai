@@ -3,11 +3,17 @@ import s from "./Messenger.module.css";
 import React from "react";
 
 const Messenger = (props) => {
-    let messagesElements = props.state.map(d => <Message state={d}/>);
+    let state = props.state.dialogsPage.messenger;
+
+    let messagesElements = state.messages.map(d => <Message state={d}/>);
 
     let newMessageElement = React.createRef();
     let onSendMessage = () => {
-        alert(newMessageElement.current.value);
+        props.store.sendMessage();
+    };
+
+    let onChangeNewMessage = () => {
+        props.store.updateNewMessageText(newMessageElement.current.value);
     };
 
     return (
@@ -19,8 +25,9 @@ const Messenger = (props) => {
                 <textarea rows={1}
                           className={s.newMessageTextarea}
                           ref={newMessageElement}
-                >
-                </textarea>
+                          value={state.newMessageText}
+                          onChange={onChangeNewMessage}
+                />
 
                 <button className={s.newMessageSend}
                         onClick={onSendMessage}
