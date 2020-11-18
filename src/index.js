@@ -5,11 +5,11 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import store from './Redux/state';
 
-let rerenderEntireTree = () => {
+let rerenderEntireTree = (state) => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={store.getState()} store={store} />
+                <App state={state} dispatch={store.dispatch.bind(store)} />
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
@@ -18,4 +18,4 @@ let rerenderEntireTree = () => {
 
 store.setSubscriber(rerenderEntireTree);
 
-rerenderEntireTree();
+rerenderEntireTree(store.getState());

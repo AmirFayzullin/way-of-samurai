@@ -62,50 +62,49 @@ let store = {
             ],
         },
     },
-    _subscriber: () => console.log('no subscribers'),
+    _callSubscriber: () => console.log('no subscribers'),
     _genID: () => {
         let rand = Math.random() * Math.pow(10, 10);
         return rand - rand % 1;
     },
 
     getState() { return this._state},
+    setSubscriber(observer) {this._callSubscriber = observer},
 
-    setSubscriber(observer) {this._subscriber = observer},
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: this._genID(),
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+            };
 
-    addPost() {
-        let newPost = {
-            id: this._genID(),
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-        };
+            this._state.profilePage.posts.unshift(newPost);
+            this._state.profilePage.newPostText = "";
+            this._callSubscriber(this._state);
+        } else if (action.type === 'SEND-MESSAGE') {
+            let newMessage = {
+                message: this._state.dialogsPage.messenger.newMessageText,
+                fromId: 0,
+                id: this._genID(),
+            };
 
-        this._state.profilePage.posts.unshift(newPost);
-        this._state.profilePage.newPostText = "";
-        this._subscriber();
-    },
+            this._state.dialogsPage.messenger.messages.push(newMessage);
+            this._state.dialogsPage.messenger.newMessageText = "";
 
-    sendMessage() {
-        let newMessage = {
-            message: this._state.dialogsPage.messenger.newMessageText,
-            fromId: 0,
-            id: this._genID(),
-        };
-
-        this._state.dialogsPage.messenger.messages.push(newMessage);
-        this._state.dialogsPage.messenger.newMessageText = "";
-
-        this._subscriber();
-    },
-
-    updateNewPostText(newPostText) {
-        this._state.profilePage.newPostText = newPostText;
-        this._subscriber();
-    },
-
-    updateNewMessageText(newMessageText) {
-        this._state.dialogsPage.messenger.newMessageText = newMessageText;
-        this._subscriber();
-    },
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newPostText;
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.messenger.newMessageText = action.newMessageText;
+            this._callSubscriber(this._state);
+        } else {
+            throw new Error(`Unknown action type: ${action.type}`);
+        }
+    }
 };
 
 export default store;
+
+window.store = store;
