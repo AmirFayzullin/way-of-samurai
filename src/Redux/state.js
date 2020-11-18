@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const SEND_MESSAGE = 'SEND-MESSAGE';
+
 let store = {
     _state: {
         profilePage: {
@@ -72,7 +77,7 @@ let store = {
     setSubscriber(observer) {this._callSubscriber = observer},
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: this._genID(),
                 message: this._state.profilePage.newPostText,
@@ -82,7 +87,7 @@ let store = {
             this._state.profilePage.posts.unshift(newPost);
             this._state.profilePage.newPostText = "";
             this._callSubscriber(this._state);
-        } else if (action.type === 'SEND-MESSAGE') {
+        } else if (action.type === SEND_MESSAGE) {
             let newMessage = {
                 message: this._state.dialogsPage.messenger.newMessageText,
                 fromId: 0,
@@ -93,10 +98,10 @@ let store = {
             this._state.dialogsPage.messenger.newMessageText = "";
 
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newPostText;
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
             this._state.dialogsPage.messenger.newMessageText = action.newMessageText;
             this._callSubscriber(this._state);
         } else {
@@ -104,6 +109,22 @@ let store = {
         }
     }
 };
+
+export const addPostActionCreator = () => ({ type: ADD_POST });
+
+export const updateNewPostTextActionCreator = (newPostText) => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newPostText: newPostText
+});
+
+export const updateNewMessageTextActionCreator = (newMessageText) => ({
+    type: UPDATE_NEW_MESSAGE_TEXT,
+    newMessageText: newMessageText,
+});
+
+export const sendMessageActionCreator = () => ({
+    type: SEND_MESSAGE,
+});
 
 export default store;
 

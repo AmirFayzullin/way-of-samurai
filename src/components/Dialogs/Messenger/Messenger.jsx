@@ -1,20 +1,21 @@
 import Message from "../Message/Message";
 import s from "./Messenger.module.css";
 import React from "react";
+import {
+    sendMessageActionCreator,
+    updateNewMessageTextActionCreator
+} from "../../../Redux/state";
 
 const Messenger = (props) => {
     let messagesElements = props.state.messages.map(d => <Message state={d}/>);
 
     let newMessageElement = React.createRef();
     let onSendMessage = () => {
-        props.dispatch({ type: 'SEND-MESSAGE' });
+        props.dispatch(sendMessageActionCreator());
     };
 
     let onChangeNewMessage = () => {
-        let action = {
-            type: 'UPDATE-NEW-MESSAGE-TEXT',
-            newMessageText: newMessageElement.current.value
-        };
+        let action = updateNewMessageTextActionCreator(newMessageElement.current.value);
         props.dispatch(action);
     };
 
