@@ -1,7 +1,7 @@
 import Message from "../Message/Message";
 import s from "./Messenger.module.css";
 import React from "react";
-import {sendMessageCreator, updateNewMessageTextCreator} from "../../../Redux/dialogsReducer";
+import {sendMessageCreator, updateNewMessageTextCreator} from "../../../redux/dialogsReducer";
 
 const Messenger = (props) => {
     let messagesElements = props.state.messages.map(d => <Message state={d}/>);
