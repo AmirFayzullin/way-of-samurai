@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import sidebarReducer from "./sidebarReducer";
 
 let store = {
     _state: {
@@ -68,63 +67,19 @@ let store = {
         },
     },
     _callSubscriber: () => console.log('no subscribers'),
-    _genID: () => {
-        let rand = Math.random() * Math.pow(10, 10);
-        return rand - rand % 1;
-    },
 
     getState() { return this._state},
     setSubscriber(observer) {this._callSubscriber = observer},
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: this._genID(),
-                message: this._state.profilePage.newPostText,
-                likesCount: 0,
-            };
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
 
-            this._state.profilePage.posts.unshift(newPost);
-            this._state.profilePage.newPostText = "";
-            this._callSubscriber(this._state);
-        } else if (action.type === SEND_MESSAGE) {
-            let newMessage = {
-                message: this._state.dialogsPage.messenger.newMessageText,
-                fromId: 0,
-                id: this._genID(),
-            };
-
-            this._state.dialogsPage.messenger.messages.push(newMessage);
-            this._state.dialogsPage.messenger.newMessageText = "";
-
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newPostText;
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogsPage.messenger.newMessageText = action.newMessageText;
-            this._callSubscriber(this._state);
-        } else {
-            throw new Error(`Unknown action type: ${action.type}`);
-        }
+        this._callSubscriber(this._state);
     }
 };
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
-
-export const updateNewPostTextActionCreator = (newPostText) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newPostText: newPostText
-});
-
-export const updateNewMessageTextActionCreator = (newMessageText) => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newMessageText: newMessageText,
-});
-
-export const sendMessageActionCreator = () => ({
-    type: SEND_MESSAGE,
-});
 
 export default store;
 

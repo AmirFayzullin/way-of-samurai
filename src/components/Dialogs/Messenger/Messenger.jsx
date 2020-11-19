@@ -1,21 +1,18 @@
 import Message from "../Message/Message";
 import s from "./Messenger.module.css";
 import React from "react";
-import {
-    sendMessageActionCreator,
-    updateNewMessageTextActionCreator
-} from "../../../Redux/state";
+import {sendMessageCreator, updateNewMessageTextCreator} from "../../../Redux/dialogsReducer";
 
 const Messenger = (props) => {
     let messagesElements = props.state.messages.map(d => <Message state={d}/>);
+    let newMessageText = props.state.newMessageText;
 
-    let newMessageElement = React.createRef();
     let onSendMessage = () => {
-        props.dispatch(sendMessageActionCreator());
+        props.dispatch(sendMessageCreator());
     };
 
-    let onChangeNewMessage = () => {
-        let action = updateNewMessageTextActionCreator(newMessageElement.current.value);
+    let onChangeNewMessage = (e) => {
+        let action = updateNewMessageTextCreator(e.target.value);
         props.dispatch(action);
     };
 
@@ -27,8 +24,7 @@ const Messenger = (props) => {
             <div className={s.newMessage}>
                 <textarea rows={1}
                           className={s.newMessageTextarea}
-                          ref={newMessageElement}
-                          value={props.state.newMessageText}
+                          value={newMessageText}
                           onChange={onChangeNewMessage}
                 />
 
