@@ -4,7 +4,6 @@ import DialogItem from "./DialogItem/DialogItem";
 import MessengerContainer from "./Messenger/MessengerContainer";
 
 const Dialogs = (props) => {
-
     let dialogsElements = props.dialogs.map(d => <DialogItem state={d}/>);
 
     return (
@@ -12,7 +11,7 @@ const Dialogs = (props) => {
             <div className={s.dialogItems}>
                 {dialogsElements}
             </div>
-            <MessengerContainer store={props.store}/>
+            <MessengerContainer />
         </div>
     )
 };
