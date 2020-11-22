@@ -1,15 +1,15 @@
 import React from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Dialogs from "./components/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
 
 import './App.css';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import Dialogs from "./components/Dialogs/Dialogs";
 
 const App = (props) => {
     return (
@@ -18,14 +18,11 @@ const App = (props) => {
             <Navbar state={props.state}/>
             <div className='app-wrapper-content'>
                 <Route path='/profile'
-                       render={() => <Profile state={props.state.profilePage}
-                                              dispatch={props.dispatch}
-                       />}
+                       render={() => <Profile store={props.store} />}
                 />
                 <Route path='/dialogs'
-                       render={() => <Dialogs state={props.state.dialogsPage}
-                                              dispatch={props.dispatch}
-                       />}
+                       render={() => <Dialogs store={props.store}
+                                              dialogs={props.state.dialogsPage.dialogs}/>}
                 />
 
                 <Route path='/news' component={News}/>
