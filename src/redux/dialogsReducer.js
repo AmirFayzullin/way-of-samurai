@@ -41,25 +41,24 @@ const dialogsReducer = (state = initialState, action) => {
                 id: genID(),
             };
 
-            let stateCopy = {...state};
-
-            stateCopy.messenger = {...state.messenger};
-            stateCopy.messenger.messages = [...state.messenger.messages].map((messageData) => ({...messageData}));
-
-            stateCopy.messenger.messages.push(newMessage);
-            stateCopy.messenger.newMessageText = "";
-
-            return stateCopy;
+            return {
+                ...state,
+                messenger: {
+                    messages: [...state.messenger.messages, newMessage],
+                    newMessageText: ""
+                },
+            };
         }
 
         case UPDATE_NEW_MESSAGE_TEXT: {
-            let stateCopy = {...state};
-            stateCopy.messenger = {...state.messenger};
-
-            stateCopy.messenger.newMessageText = action.newMessageText;
-            return stateCopy;
+            return {
+                ...state,
+                messenger: {
+                    ...state.messenger,
+                    newMessageText: action.newMessageText
+                }
+            };
         }
-
         default:
             return state;
     }
