@@ -1,5 +1,8 @@
-.avatar {
-    width: 100px;
-    height: 150px;
-    object-fit: cover;
+.users {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: auto;
+    grid-gap: 30px;
+    padding: 10px;
+    box-sizing: border-box;
 }

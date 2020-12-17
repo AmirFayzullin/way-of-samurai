@@ -16,3 +16,8 @@
     height: inherit;
     object-fit: cover;
 }
+
+.name {
+    color: #404040;
+    font-size: 1.1rem;
+}

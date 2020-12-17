@@ -1,0 +1,82 @@
+.user {
+    display: grid;
+    grid-template: auto / 100px calc(100% - 100px);
+    grid-gap: 10px;
+}
+
+.leftBar {
+    display: grid;
+    grid-template: auto auto / 100%;
+    grid-gap: 5px;
+    justify-items: center;
+    align-items: center;
+}
+
+.leftBar > .avatar {
+    width: 65px;
+    height: 65px;
+    object-position: center;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.leftBar > .button {
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.button.follow {
+    background: hsl(207, 67%, 56%);
+    color: #fff;
+}
+
+.button.follow:hover {
+    background: hsl(209, 50%, 44%);
+    color: #fff;
+}
+
+.button.unfollow {
+    background: #d8d8d8;
+    color: grey;
+}
+
+.button.unfollow:hover {
+    background: #c1c1c1;
+    color: grey;
+}
+
+.rightBar {
+    display: grid;
+    grid-template: 100% / 70% 30%;
+}
+
+.nameStat {
+    display: grid;
+    grid-template: min-content auto / 100%;
+}
+
+.nameStat > .name {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #404040;
+}
+
+.nameStat > .status {
+    font-weight: 400;
+    color: #616161;
+}
+
+.location {
+    display: grid;
+    grid-template: 1fr 1fr / 100%;
+    align-items: center;
+    color: #404040;
+}
