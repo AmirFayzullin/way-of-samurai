@@ -1,0 +1,19 @@
+.wrapper {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.preloaderImage {
+    height: 100%;
+    animation: preloader-spin .5s infinite linear;
+    opacity: .6;
+}
+
+@keyframes preloader-spin {
+    0% {transform: rotate(0)}
+    100% {transform: rotate(360deg)}
+}
