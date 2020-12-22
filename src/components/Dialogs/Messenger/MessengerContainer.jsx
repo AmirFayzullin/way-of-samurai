@@ -1,4 +1,4 @@
-import {sendMessageCreator, updateNewMessageTextCreator} from "../../../redux/dialogsReducer";
+import {sendMessage, updateNewMessageText} from "../../../redux/dialogsReducer";
 import Messenger from "./Messenger";
 import {connect} from "react-redux";
 
@@ -9,13 +9,6 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        sendMessage: () => {dispatch(sendMessageCreator())},
-        updateNewMessageText: (text) => dispatch(updateNewMessageTextCreator(text)),
-    }
-};
-
-const MessengerContainer = connect(mapStateToProps, mapDispatchToProps)(Messenger);
+const MessengerContainer = connect(mapStateToProps, {sendMessage, updateNewMessageText,})(Messenger);
 
 export default MessengerContainer;
