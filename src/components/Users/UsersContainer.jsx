@@ -20,7 +20,7 @@ class UsersContainer extends React.Component {
             .then(response => {
                 this.props.setIsFetching(false);
                 this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount % 30);
+                this.props.setTotalUsersCount(response.data.totalCount % 100);
             });
     }
 
@@ -47,7 +47,6 @@ class UsersContainer extends React.Component {
                        onPageChanged={this.onPageChanged}
                        unfollow={this.props.unfollow}
                        follow={this.props.follow}
-
                 />
             }
         </>

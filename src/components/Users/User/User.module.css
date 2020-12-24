@@ -67,6 +67,7 @@
     font-size: 1.4rem;
     font-weight: 500;
     color: #404040;
+    cursor: pointer;
 }
 
 .nameStat > .status {

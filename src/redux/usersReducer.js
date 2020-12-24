@@ -7,7 +7,7 @@ const SET_IS_FETCHING = 'SET_IS_FETCHING';
 
 let initialState = {
     users: [ ],
-    pageSize: 2,
+    pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false
