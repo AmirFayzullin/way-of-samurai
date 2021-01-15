@@ -1,4 +1,4 @@
-import genID from "./gedID";
+import genID from "./genID";
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const SEND_MESSAGE = 'SEND-MESSAGE';

@@ -14,7 +14,6 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        debugger;
         return <Profile {...this.props}/>;
     }
 }
