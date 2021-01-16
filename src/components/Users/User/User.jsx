@@ -7,20 +7,26 @@ import {usersAPI} from "../../../api/api";
 const User = (props) => {
 
     const follow = (userId) => {
+        props.toggleFollowingInProgress(true, userId);
+
         usersAPI.follow(userId)
             .then(data => {
                if (data.resultCode === 0) {
                    props.follow(userId);
                }
+               props.toggleFollowingInProgress(false, userId);
             });
     };
 
     const unfollow = (userId) => {
+        props.toggleFollowingInProgress(true, userId);
+
         usersAPI.unfollow(userId)
             .then(data => {
                 if (data.resultCode === 0) {
                     props.unfollow(userId);
                 }
+                props.toggleFollowingInProgress(false, userId);
             });
     };
 
@@ -31,9 +37,19 @@ const User = (props) => {
                 <img className={s.avatar} src={props.userData.photos.small || userPhoto} alt="ava"/>
 
                 {props.userData.followed ?
-                    <button className={`${s.button} ${s.unfollow}`} onClick={() => unfollow(props.userData.id)}>Unfollow</button>
+                    <button disabled={props.isFollowingInProgress}
+                            className={`${s.button} ${s.unfollow}`}
+                            onClick={() => unfollow(props.userData.id)}
+                    >
+                        Unfollow
+                    </button>
                     :
-                    <button className={`${s.button} ${s.follow}`} onClick={() => follow(props.userData.id)}>Follow</button>
+                    <button disabled={props.isFollowingInProgress}
+                            className={`${s.button} ${s.follow}`}
+                            onClick={() => follow(props.userData.id)}
+                    >
+                        Follow
+                    </button>
                 }
             </span>
 
