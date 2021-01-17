@@ -1,5 +1,7 @@
+import {authAPI, profileAPI} from "../api/api";
+
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA';
-const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const SET_AUTH_USER_PROFILE = 'SET-AUTH-USER-PROFILE';
 const SET_IS_FETCHING_PROFILE = 'SET-IS-FETCHING-PROFILE';
 
 const initialState = {
@@ -19,7 +21,7 @@ const authReducer = (state = initialState, action) => {
                 ...action.data,
                 isAuth: true
             };
-        case SET_USER_PROFILE:
+        case SET_AUTH_USER_PROFILE:
             return {
                 ...state,
                 profileData: action.profileData
@@ -35,8 +37,26 @@ const authReducer = (state = initialState, action) => {
 };
 
 export const setAuthUserData = (userId, email, login) => ({type: SET_AUTH_USER_DATA, data: {userId, email, login}});
-export const setAuthUserProfile = (profileData) => ({type: SET_USER_PROFILE, profileData});
+export const setAuthUserProfile = (profileData) => ({type: SET_AUTH_USER_PROFILE, profileData});
 export const setIsFetchingProfile = (isFetching) => ({type: SET_IS_FETCHING_PROFILE, isFetching});
+
+export const authMe = () => (dispatch) => {
+    authAPI.authMe()
+        .then(data => {
+            if(data.resultCode === 0) {
+                let {id, email, login} = data.data;
+
+                dispatch(setIsFetchingProfile(true));
+                dispatch(setAuthUserData(id, email, login));
+
+                profileAPI.getProfile(id)
+                    .then(data => {
+                        dispatch(setAuthUserProfile(data));
+                        dispatch(setIsFetchingProfile(false));
+                    });
+            }
+        });
+};
 
 export default authReducer;
 

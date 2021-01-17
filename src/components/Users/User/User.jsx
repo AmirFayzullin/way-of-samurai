@@ -2,33 +2,12 @@ import React from 'react';
 import s from "./User.module.css";
 import userPhoto from '../../../assets/images/user.png';
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../../api/api";
 
 const User = (props) => {
 
-    const follow = (userId) => {
-        props.toggleFollowingInProgress(true, userId);
+    const follow = (userId) => props.follow(userId);
 
-        usersAPI.follow(userId)
-            .then(data => {
-               if (data.resultCode === 0) {
-                   props.follow(userId);
-               }
-               props.toggleFollowingInProgress(false, userId);
-            });
-    };
-
-    const unfollow = (userId) => {
-        props.toggleFollowingInProgress(true, userId);
-
-        usersAPI.unfollow(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    props.unfollow(userId);
-                }
-                props.toggleFollowingInProgress(false, userId);
-            });
-    };
+    const unfollow = (userId) => props.unfollow(userId);
 
     return (
         <div className={s.user}>

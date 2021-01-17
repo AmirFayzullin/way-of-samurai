@@ -23,8 +23,8 @@ let Users = (props) => {
             </div>
             {
                 props.users.map(userData => <User userData={userData}
-                                                            follow={(userId) => props.follow(userId)}
-                                                            unfollow={(userId) => props.unfollow(userId)}
+                                                            follow={props.follow}
+                                                            unfollow={props.unfollow}
                                                             key={userData.id}
                                                             toggleFollowingInProgress={props.toggleFollowingInProgress}
                                                             isFollowingInProgress={props.followingInProgressUsersIds.some(id => id === userData.id)}
