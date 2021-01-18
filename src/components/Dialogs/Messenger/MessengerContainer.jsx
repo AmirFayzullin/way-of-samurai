@@ -9,6 +9,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-const MessengerContainer = connect(mapStateToProps, {sendMessage, updateNewMessageText,})(Messenger);
-
-export default MessengerContainer;
+export default connect(mapStateToProps, {sendMessage, updateNewMessageText,})(Messenger);

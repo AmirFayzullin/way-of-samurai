@@ -5,6 +5,7 @@ import {getProfile, setUserProfile, toggleProfileFetching} from "../../redux/pro
 import {withRouter} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import withAuthRedirect from "../common/RedirectToLogin/RedirectToLogin";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -41,6 +42,8 @@ let mapStateToProps = (state) => ({
     authUserId: state.auth.userId
 });
 
-let ProfileContainerWithURLData = withAuthRedirect(withRouter(ProfileContainer));
-
-export default connect(mapStateToProps, {setUserProfile, toggleProfileFetching, getProfile})(ProfileContainerWithURLData);
+export default compose(
+    connect(mapStateToProps, {setUserProfile, toggleProfileFetching, getProfile}),
+    withAuthRedirect,
+    withRouter
+)(ProfileContainer);
