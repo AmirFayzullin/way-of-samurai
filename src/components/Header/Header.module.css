@@ -2,8 +2,26 @@
     grid-area: h;
     display: flex;
     justify-content: space-between;
+    padding: 0 10px;
 }
 
 .header > img {
     height: 100%;
+}
+
+.loginButton {
+    align-self: center;
+    padding: 10px;
+    border-radius: 10px;
+    background: hsl(207, 67%, 56%);
+    color: #fff;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -ms-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
+}
+
+.loginButton:hover {
+    background: hsl(209, 50%, 44%);
 }

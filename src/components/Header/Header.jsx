@@ -14,7 +14,7 @@ const Header = (props) => {
                 props.isAuth ?
                     <UserCardContainer />
                     :
-                    (<NavLink to='/login'>
+                    (<NavLink className={s.loginButton} to='/login'>
                         login
                     </NavLink>)
             }

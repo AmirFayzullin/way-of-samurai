@@ -26,7 +26,6 @@ let Users = (props) => {
                                                             follow={props.follow}
                                                             unfollow={props.unfollow}
                                                             key={userData.id}
-                                                            toggleFollowingInProgress={props.toggleFollowingInProgress}
                                                             isFollowingInProgress={props.followingInProgressUsersIds.some(id => id === userData.id)}
                                                         />)
             }
