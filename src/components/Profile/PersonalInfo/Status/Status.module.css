@@ -1,0 +1,22 @@
+.status, .statusInput {
+    font-size: 1.1rem;
+    color: #6c6c6c;
+    padding: 10px;
+}
+
+.status {
+    user-select: none;
+    cursor: pointer;
+}
+
+.statusInput {
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    animation: up .3s forwards;
+}
+
+@keyframes up {
+    0%{box-shadow: 0 0 0 0 lightgrey;}
+    100%{box-shadow: 0 0 10px 1px lightgrey;}
+}

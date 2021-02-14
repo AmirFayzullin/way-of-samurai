@@ -10,29 +10,3 @@
     height: 100%;
     object-fit: contain;
 }
-
-.personalInfo {
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template: repeat(2, 1fr) / 100%;
-    grid-gap: 10px;
-    align-items: center;
-}
-
-.nameAndStatus,
-.jobStatus {
-    display: grid;
-    grid-template: repeat(2, min-content) / 100%;
-}
-
-.fullName {
-    font-size: 1.4rem;
-    color: #424242;
-}
-
-.status {
-    font-size: 1.1rem;
-    color: #6c6c6c;
-}
-

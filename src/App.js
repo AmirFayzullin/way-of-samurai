@@ -1,7 +1,5 @@
 import React from 'react';
 import {Route} from "react-router-dom";
-
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
@@ -17,20 +15,20 @@ import Login from "./components/Login/Login";
 const App = (props) => {
     return (
         <div className='app-wrapper'>
-            <HeaderContainer />
+            <HeaderContainer/>
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/profile/:userId?'
-                       render={() => <ProfileContainer />}
+                       render={() => <ProfileContainer/>}
                 />
                 <Route path='/dialogs'
-                       render={() => <DialogsContainer />}
+                       render={() => <DialogsContainer/>}
                 />
                 <Route path='/login'
-                       render={() => <Login />}
+                       render={() => <Login/>}
                 />
                 <Route path='/users'
-                       render={() => <UsersContainer />}
+                       render={() => <UsersContainer/>}
                 />
 
                 <Route path='/news' component={News}/>
