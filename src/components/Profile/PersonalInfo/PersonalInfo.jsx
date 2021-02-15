@@ -7,7 +7,7 @@ const PersonalInfo = (props) => {
         <div className={s.personalInfo}>
             <div className={s.nameAndStatus}>
                 <p className={s.fullName}>{props.profile.fullName}</p>
-                <Status status={props.profile.aboutMe || 'Hey, see my status'}/>
+                <Status status={props.status} updateStatus={props.updateStatus}/>
             </div>
 
             <div className={s.jobStatus}>

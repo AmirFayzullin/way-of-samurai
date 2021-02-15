@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfile, setUserProfile, toggleProfileFetching} from "../../redux/profileReducer";
+import {getProfile, getStatus, setUserProfile, toggleProfileFetching, updateStatus} from "../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import withAuthRedirect from "../common/RedirectToLogin/RedirectToLogin";
@@ -15,6 +15,7 @@ class ProfileContainer extends React.Component {
 
 
         this.props.getProfile(userId);
+        this.props.getStatus(userId);
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -27,6 +28,7 @@ class ProfileContainer extends React.Component {
         if (!userId) return true;
 
         this.props.getProfile(userId);
+        this.props.getStatus(userId);
 
         return true;
     }
@@ -38,12 +40,15 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status,
     isFetchingProfile: state.profilePage.isFetchingProfile,
     authUserId: state.auth.userId
 });
 
 export default compose(
-    connect(mapStateToProps, {setUserProfile, toggleProfileFetching, getProfile}),
+    connect(mapStateToProps,
+        {setUserProfile, toggleProfileFetching, getProfile, getStatus, updateStatus}
+        ),
     withAuthRedirect,
     withRouter
 )(ProfileContainer);

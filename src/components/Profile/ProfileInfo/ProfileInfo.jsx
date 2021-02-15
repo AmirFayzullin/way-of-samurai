@@ -13,7 +13,7 @@ const ProfileInfo = (props) => {
                  className={s.avatar}
                  alt="ava"
             />
-            <PersonalInfo profile={props.profile}/>
+            <PersonalInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
         </div>
     );
 };
