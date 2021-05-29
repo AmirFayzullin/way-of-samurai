@@ -1,6 +1,7 @@
-import {addPost, updateNewPostText} from "../../../redux/profileReducer";
+import {addPost} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
+import {resetForm} from "../../../redux/dialogsReducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -9,6 +10,6 @@ let mapStateToProps = (state) => {
     }
 };
 
-const MyPostsContainer = connect(mapStateToProps, {updateNewPostText, addPost,})(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, {addPost, resetForm})(MyPosts);
 
 export default MyPostsContainer;

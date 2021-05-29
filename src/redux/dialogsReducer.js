@@ -1,8 +1,7 @@
 import genID from "./genID";
+import {reset} from 'redux-form';
 
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const SEND_MESSAGE = 'SEND-MESSAGE';
-
 
 let initialState = {
     dialogs: [
@@ -28,7 +27,6 @@ let initialState = {
             {message: 'Hi, bro!', fromId: 1, id: 1},
             {message: 'How are you?', fromId: 0, id: 2},
         ],
-        newMessageText: "",
     }
 };
 
@@ -36,7 +34,7 @@ const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SEND_MESSAGE: {
             let newMessage = {
-                message: state.messenger.newMessageText,
+                message: action.msg,
                 fromId: 0,
                 id: genID(),
             };
@@ -45,18 +43,7 @@ const dialogsReducer = (state = initialState, action) => {
                 ...state,
                 messenger: {
                     messages: [...state.messenger.messages, newMessage],
-                    newMessageText: ""
                 },
-            };
-        }
-
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                messenger: {
-                    ...state.messenger,
-                    newMessageText: action.newMessageText
-                }
             };
         }
         default:
@@ -66,7 +53,8 @@ const dialogsReducer = (state = initialState, action) => {
 
 
 export default dialogsReducer;
+export const resetForm = (formName) => (dispatch) => {
+    dispatch(reset(formName));
+};
 
-
-export const updateNewMessageText = (newMessageText) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: newMessageText,});
-export const sendMessage = () => ({type: SEND_MESSAGE,});
+export const sendMessage = (msg) => ({type: SEND_MESSAGE, msg});

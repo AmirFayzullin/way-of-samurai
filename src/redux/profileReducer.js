@@ -20,7 +20,6 @@ let initialState = {
             likesCount: 12
         }
     ],
-    newPostText: "",
     profile: null,
     status: '',
     isFetchingProfile: false
@@ -31,21 +30,13 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let newPost = {
                 id: genID(),
-                message: state.newPostText,
+                message: action.post,
                 likesCount: 0,
             };
 
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ""
-            };
-        }
-
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newPostText
             };
         }
 
@@ -74,8 +65,7 @@ const profileReducer = (state = initialState, action) => {
 export default profileReducer;
 
 
-export const addPost = () => ({type: ADD_POST});
-export const updateNewPostText = (newPostText) => ({type: UPDATE_NEW_POST_TEXT, newPostText});
+export const addPost = (post) => ({type: ADD_POST, post});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const toggleProfileFetching = (isFetching) => ({type: TOGGLE_PROFILE_FETCHING, isFetching});
 export const setStatus = (status) => ({type: SET_STATUS, status});
