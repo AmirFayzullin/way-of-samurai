@@ -2,7 +2,6 @@ import genID from "./genID";
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const TOGGLE_PROFILE_FETCHING = 'TOGGLE-PROFILE-FETCHING';
 const SET_STATUS = 'SET-STATUS';

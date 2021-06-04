@@ -1,5 +1,6 @@
 import UserCard from "./UserCard";
 import {connect} from "react-redux";
+import {logout} from "../../redux/authReducer";
 
 let mapStateToProps = (state) => ({
    isFetchingProfile: state.auth.isFetchingProfile,
@@ -7,4 +8,4 @@ let mapStateToProps = (state) => ({
    isAuth: state.auth.isAuth,
 });
 
-export default connect(mapStateToProps, {})(UserCard);
+export default connect(mapStateToProps, {logout})(UserCard);

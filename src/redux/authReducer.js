@@ -3,6 +3,7 @@ import {authAPI, profileAPI} from "../api/api";
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA';
 const SET_AUTH_USER_PROFILE = 'SET-AUTH-USER-PROFILE';
 const SET_IS_FETCHING_PROFILE = 'SET-IS-FETCHING-PROFILE';
+const CLEAR_AUTH_DATA = 'CLEAR-AUTH-DATA';
 
 const initialState = {
     userId: null,
@@ -19,7 +20,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             };
         case SET_AUTH_USER_PROFILE:
             return {
@@ -31,12 +31,15 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isFetchingProfile: action.isFetching,
             };
+        case CLEAR_AUTH_DATA:
+            return initialState;
         default:
             return state;
     }
 };
 
-export const setAuthUserData = (userId, email, login) => ({type: SET_AUTH_USER_DATA, data: {userId, email, login}});
+export const clearAuthData = () => ({type: CLEAR_AUTH_DATA});
+export const setAuthUserData = (userId, email, login, isAuth = true) => ({type: SET_AUTH_USER_DATA, data: {userId, email, login, isAuth}});
 export const setAuthUserProfile = (profileData) => ({type: SET_AUTH_USER_PROFILE, profileData});
 export const setIsFetchingProfile = (isFetching) => ({type: SET_IS_FETCHING_PROFILE, isFetching});
 
@@ -55,6 +58,22 @@ export const authMe = () => (dispatch) => {
                         dispatch(setIsFetchingProfile(false));
                     });
             }
+        });
+};
+
+export const login = (email, password, rememberMe) => (dispatch) => {
+    authAPI.login(email, password, rememberMe)
+        .then(data => {
+            if (data.resultCode === 0)
+                dispatch(authMe());
+        });
+};
+
+export const logout = () => (dispatch) => {
+    authAPI.logout()
+        .then(data => {
+            if (data.resultCode === 0)
+                dispatch(clearAuthData());
         });
 };
 
