@@ -1,8 +1,30 @@
+.formControl textarea,
+.formControl input {
+    border: solid 2px transparent;
+    padding: 5px;
+    background: #eeeeee;
+    border-radius: 10px;
+    transition: .2s;
+    outline: none;
+}
+
+.formControl textarea:focus,
+.formControl input:focus {
+    background: transparent;
+    border-color: hsl(210, 50%, 50%) !important;
+}
+
 .formControl.error textarea,
 .formControl.error input {
-    border: solid 1px red;
+    border: solid 2px red;
 }
 
 .formControl.error span {
+    color: red;
+}
+
+.formSummaryError {
+    border: solid 2px red;
+    padding: 10px;
     color: red;
 }

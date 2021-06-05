@@ -1,4 +1,5 @@
 import {authAPI, profileAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA';
 const SET_AUTH_USER_PROFILE = 'SET-AUTH-USER-PROFILE';
@@ -64,8 +65,11 @@ export const authMe = () => (dispatch) => {
 export const login = (email, password, rememberMe) => (dispatch) => {
     authAPI.login(email, password, rememberMe)
         .then(data => {
-            if (data.resultCode === 0)
+            if (data.resultCode === 0) {
                 dispatch(authMe());
+            } else if (data.messages.length){
+                dispatch(stopSubmit("login", {_error: data.messages.join(', ')}));
+            }
         });
 };
 

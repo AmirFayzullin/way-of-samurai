@@ -5,10 +5,12 @@ import {required} from "../../utils/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/authReducer";
 import {Redirect} from "react-router-dom";
+import formControlsStyles from '../common/FormsControls/FormsControls.module.css';
+import s from './Login.module.css';
 
 const LoginForm = (props) => {
     return (
-        <form name={"login"} onSubmit={props.handleSubmit}>
+        <form name={"login"} className={s.loginForm} onSubmit={props.handleSubmit}>
             <div>
                 <Field name={"email"}
                        placeholder={"Email"}
@@ -30,6 +32,12 @@ const LoginForm = (props) => {
                        type={"checkbox"}
                 /> remember me
             </div>
+            {
+                props.error &&
+                    <div className={formControlsStyles.formSummaryError}>
+                        {props.error}
+                    </div>
+            }
             <div>
                 <button>Login</button>
             </div>
