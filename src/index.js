@@ -5,6 +5,11 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import store from './redux/reduxStore';
 import {Provider} from "react-redux";
+import {FAKEAC} from "./redux/appReducer";
+
+setInterval(() => {
+    store.dispatch(FAKEAC());
+}, 1000);
 
 ReactDOM.render(
     <BrowserRouter>

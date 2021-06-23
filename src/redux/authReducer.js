@@ -53,7 +53,7 @@ export const authMe = () => (dispatch) => {
                 dispatch(setIsFetchingProfile(true));
                 dispatch(setAuthUserData(id, email, login));
 
-                profileAPI.getProfile(id)
+                return profileAPI.getProfile(id)
                     .then(data => {
                         dispatch(setAuthUserProfile(data));
                         dispatch(setIsFetchingProfile(false));

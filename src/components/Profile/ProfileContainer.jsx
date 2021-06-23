@@ -1,7 +1,13 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {requestProfile, requestStatus, setUserProfile, toggleProfileFetching, updateStatus} from "../../redux/profileReducer";
+import {
+    requestProfile,
+    requestStatus,
+    setUserProfile,
+    toggleProfileFetching,
+    updateStatus
+} from "../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
@@ -56,6 +62,6 @@ let mapStateToProps = (state) => ({
 export default compose(
     connect(mapStateToProps,
         {setUserProfile, toggleProfileFetching, requestProfile, requestStatus, updateStatus}
-        ),
+    ),
     withRouter
 )(ProfileContainer);
