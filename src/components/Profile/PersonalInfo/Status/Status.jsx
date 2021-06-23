@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import s from "./Status.module.css";
 
 const Status = (props) => {
@@ -11,6 +11,10 @@ const Status = (props) => {
         props.updateStatus(status);
     };
     const onChangeStatus = (e) => setStatus(e.currentTarget.value);
+
+    useEffect(() => {
+        setStatus(props.status);
+    }, [props.status]);
 
     return (
         <>

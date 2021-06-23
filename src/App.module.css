@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 .appWrapper {
     display: grid;
     width: 90vw;
@@ -26,6 +30,18 @@
     padding: 5px;
 }
 
-a {
-    text-decoration: none;
+.preloaderWrapper {
+    position: absolute;
+    top: 25vh;
+    left: 25vw;
+    width: 50vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
 }
