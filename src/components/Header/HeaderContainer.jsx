@@ -3,6 +3,7 @@ import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import UserCardContainer from "../UserCard/UserCardContainer";
 import {connect} from "react-redux";
+import {getAuthUserId, getIsAuth} from "../../redux/authSelectors";
 
 const HeaderContainer = (props) => {
     return (
@@ -24,8 +25,8 @@ const HeaderContainer = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth,
-    userId: state.auth.userId
+    isAuth: getIsAuth(state),
+    userId: getAuthUserId(state),
 });
 
 export default connect(mapStateToProps)(HeaderContainer);

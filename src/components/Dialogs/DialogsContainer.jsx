@@ -2,14 +2,13 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import withAuthRedirect from "../common/RedirectToLogin/RedirectToLogin";
 import {compose} from "redux";
+import {getDialogs} from "../../redux/dialogsSelectors";
 
-const mapStateToProps = (state) => {
-    return {
-        dialogs: state.dialogsPage.dialogs
-    }
-};
+const mstp = (state) => ({
+    dialogs: getDialogs(state),
+});
 
 export default compose(
-    connect(mapStateToProps),
+    connect(mstp),
     withAuthRedirect
 )(Dialogs);

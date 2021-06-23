@@ -1,7 +1,8 @@
 import {resetForm, sendMessage} from "../../../redux/dialogsReducer";
 import Messenger from "./Messenger";
 import {connect} from "react-redux";
+import {getMessages} from "../../../redux/dialogsSelectors";
 
-const mapStateToProps = (state) => ({messages: state.dialogsPage.messenger.messages, });
+const mstp = (state) => ({messages: getMessages(state), });
 
-export default connect(mapStateToProps, {sendMessage, resetForm})(Messenger);
+export default connect(mstp, {sendMessage, resetForm})(Messenger);

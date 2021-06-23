@@ -1,10 +1,12 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfile, getStatus, setUserProfile, toggleProfileFetching, updateStatus} from "../../redux/profileReducer";
+import {requestProfile, requestStatus, setUserProfile, toggleProfileFetching, updateStatus} from "../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
+import {getIsFetchingProfile, getProfile, getStatus} from "../../redux/profileSelectors";
+import {getAuthUserId} from "../../redux/authSelectors";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -15,19 +17,15 @@ class ProfileContainer extends React.Component {
             return;
         }
 
-        this.props.getProfile(userId);
-        this.props.getStatus(userId);
+        this.props.requestProfile(userId);
+        this.props.requestStatus(userId);
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         let currentUserId = this.props.match.params.userId;
         let nextUserId = nextProps.match.params.userId;
-        if (((currentUserId === nextUserId) &&
-            currentUserId &&
-            nextUserId &&
-            !nextProps.authUserId) ||
-            this.props.profile?.userId === nextProps.authUserId ||
-            this.props.profile?.userId === nextUserId ||
+        if ((currentUserId === nextUserId) ||
+            (!nextUserId && !nextProps.authUserId) ||
             this.props.isFetchingProfile) return true;
 
         let userId = nextUserId || nextProps.authUserId;
@@ -37,8 +35,8 @@ class ProfileContainer extends React.Component {
             return true;
         }
 
-        this.props.getProfile(userId);
-        this.props.getStatus(userId);
+        this.props.requestProfile(userId);
+        this.props.requestStatus(userId);
 
         return true;
     }
@@ -49,15 +47,15 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    isFetchingProfile: state.profilePage.isFetchingProfile,
-    authUserId: state.auth.userId
+    profile: getProfile(state),
+    status: getStatus(state),
+    isFetchingProfile: getIsFetchingProfile(state),
+    authUserId: getAuthUserId(state),
 });
 
 export default compose(
     connect(mapStateToProps,
-        {setUserProfile, toggleProfileFetching, getProfile, getStatus, updateStatus}
+        {setUserProfile, toggleProfileFetching, requestProfile, requestStatus, updateStatus}
         ),
     withRouter
 )(ProfileContainer);

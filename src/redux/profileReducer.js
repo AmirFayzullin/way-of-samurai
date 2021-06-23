@@ -69,7 +69,7 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const toggleProfileFetching = (isFetching) => ({type: TOGGLE_PROFILE_FETCHING, isFetching});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 
-export const getProfile = (userId) => (dispatch) => {
+export const requestProfile = (userId) => (dispatch) => {
     dispatch(toggleProfileFetching(true));
 
     profileAPI.getProfile(userId)
@@ -79,7 +79,7 @@ export const getProfile = (userId) => (dispatch) => {
         });
 };
 
-export const getStatus = (userId) => (dispatch) => {
+export const requestStatus = (userId) => (dispatch) => {
     profileAPI.getStatus(userId)
         .then((data) => {
             dispatch(setStatus(data))

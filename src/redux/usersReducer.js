@@ -75,7 +75,7 @@ export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_C
 export const setIsFetching = (isFetching) => ({type: SET_IS_FETCHING, isFetching});
 export const toggleFollowingInProgress = (isFetching, userId) => ({type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId});
 
-export const getUsers = (pageNumber, pageSize) => (dispatch) => {
+export const requestUsers = (pageNumber, pageSize) => (dispatch) => {
     dispatch(setCurrentPage(pageNumber));
     dispatch(setIsFetching(true));
 

@@ -14,6 +14,7 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import {getInitialized} from "./redux/appSelectors";
 
 class App extends Component {
     componentDidMount() {
@@ -57,7 +58,7 @@ class App extends Component {
 }
 
 const mstp = (state) => ({
-   initialized: state.app.initialized,
+   initialized: getInitialized(state),
 });
 
 export default connect(mstp, {initializeApp})(App);

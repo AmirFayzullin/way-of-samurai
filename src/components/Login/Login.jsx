@@ -7,6 +7,7 @@ import {login} from "../../redux/authReducer";
 import {Redirect} from "react-router-dom";
 import formControlsStyles from '../common/FormsControls/FormsControls.module.css';
 import s from './Login.module.css';
+import {getIsAuth} from "../../redux/authSelectors";
 
 const LoginForm = (props) => {
     return (
@@ -61,7 +62,7 @@ const Login = (props) => {
 };
 
 const mstp = (state) => ({
-   isAuth: state.auth.isAuth,
+   isAuth: getIsAuth(state),
 });
 
 export default connect(mstp, {login})(Login);
