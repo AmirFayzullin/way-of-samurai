@@ -1,51 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from "./Status.module.css";
 
-class Status extends React.Component {
-    state = {
-        editMode: false,
-        status: this.props.status
+const Status = (props) => {
+    let [editMode, setEditMode] = useState(false);
+    let [status, setStatus] = useState(props.status);
+
+    const activateEditMode = () => setEditMode(true);
+    const deactivateEditMode = () => {
+        setEditMode(false);
+        props.updateStatus(status);
     };
+    const onChangeStatus = (e) => setStatus(e.currentTarget.value);
 
-    setEditMode = (isOn) => {
-        this.setState({
-            editMode: isOn
-        });
+    return (
+        <>
+            {!editMode &&
+            <p onDoubleClick={activateEditMode}
+               className={s.status}
+            >
+                {props.status || "-----------"}
+            </p>
+            }
+            {editMode &&
+            <input className={s.statusInput}
+                   autoFocus={true}
+                   onBlur={deactivateEditMode}
+                   onChange={onChangeStatus}
+                   value={status}
+            />
+            }
+        </>
+    )
+};
 
-        if (!isOn) this.props.updateStatus(this.state.status);
-    };
-
-    onStatusChange = (e) => {
-        this.setState({
-            status: e.target.value
-        });
-    };
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-
-    }
-
-    render() {
-        return (
-            <>
-                {!this.state.editMode &&
-                    <p onDoubleClick={() => this.setEditMode(true)}
-                       className={s.status}
-                    >
-                        {this.props.status || "-----------"}
-                    </p>
-                }
-                {this.state.editMode &&
-                    <input className={s.statusInput}
-                           autoFocus={true}
-                           onBlur={() => this.setEditMode(false)}
-                           onChange={this.onStatusChange}
-                           value={this.state.status}
-                    />
-                }
-            </>
-        )
-    }
-}
 
 export default Status;

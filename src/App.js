@@ -35,6 +35,9 @@ class App extends Component {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className={s.appWrapperContent}>
+                    <Route path={'/'} exact
+                           render={() => <ProfileContainer />}
+                    />
                     <Route path='/profile/:userId?'
                            render={() => <ProfileContainer/>}
                     />
