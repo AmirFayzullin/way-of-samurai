@@ -45,7 +45,7 @@ export const setAuthUserProfile = (profileData) => ({type: SET_AUTH_USER_PROFILE
 export const setIsFetchingProfile = (isFetching) => ({type: SET_IS_FETCHING_PROFILE, isFetching});
 
 export const authMe = () => (dispatch) => {
-    authAPI.authMe()
+    return authAPI.authMe()
         .then(data => {
             if(data.resultCode === 0) {
                 let {id, email, login} = data.data;

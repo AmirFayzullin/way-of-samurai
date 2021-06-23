@@ -10,20 +10,32 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId || this.props.authUserId;
 
-        if (!userId) return;
+        if (!userId) {
+            this.props.history.push('/login');
+            return;
+        }
 
         this.props.getProfile(userId);
         this.props.getStatus(userId);
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if ((this.props.match.params.userId === nextProps.match.params.userId) ||
-            (!nextProps.match.params.userId && !nextProps.authUserId) ||
+        let currentUserId = this.props.match.params.userId;
+        let nextUserId = nextProps.match.params.userId;
+        if (((currentUserId === nextUserId) &&
+            currentUserId &&
+            nextUserId &&
+            !nextProps.authUserId) ||
+            this.props.profile?.userId === nextProps.authUserId ||
+            this.props.profile?.userId === nextUserId ||
             this.props.isFetchingProfile) return true;
 
-        let userId = nextProps.match.params.userId || nextProps.authUserId;
+        let userId = nextUserId || nextProps.authUserId;
 
-        if (!userId) return true;
+        if (!userId) {
+            this.props.history.push('/login');
+            return true;
+        }
 
         this.props.getProfile(userId);
         this.props.getStatus(userId);
