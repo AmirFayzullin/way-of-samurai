@@ -2,6 +2,7 @@ import genID from "./genID";
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
+const DELETE_POST = 'DELETE-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const TOGGLE_PROFILE_FETCHING = 'TOGGLE-PROFILE-FETCHING';
 const SET_STATUS = 'SET-STATUS';
@@ -39,6 +40,12 @@ const profileReducer = (state = initialState, action) => {
             };
         }
 
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id !== action.id),
+            };
+
         case SET_USER_PROFILE:
             return {
                 ...state,
@@ -65,6 +72,7 @@ export default profileReducer;
 
 
 export const addPost = (post) => ({type: ADD_POST, post});
+export const deletePost = (id) => ({type: DELETE_POST, id});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const toggleProfileFetching = (isFetching) => ({type: TOGGLE_PROFILE_FETCHING, isFetching});
 export const setStatus = (status) => ({type: SET_STATUS, status});
