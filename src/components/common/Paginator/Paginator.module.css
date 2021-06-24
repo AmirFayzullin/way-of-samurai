@@ -1,0 +1,24 @@
+
+.pagesNumbersWrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 40px;
+    grid-auto-columns: 40px;
+    grid-gap: 10px;
+}
+
+.pageNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 10px;
+    background: rgba(215, 215, 215, 0.9);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.selected {
+    background: hsl(206, 63%, 54%);
+}

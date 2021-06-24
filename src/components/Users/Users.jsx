@@ -1,33 +1,24 @@
 import React from 'react';
 import s from './Users.module.css';
 import User from "./User/User";
+import Paginator from "../common/Paginator/Paginator";
 
-let Users = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) pages.push(i);
+let Users = ({totalUsersCount, pageSize, currentPage,
+                 onPageChanged, follow, unfollow,
+                 users, followingInProgressUsersIds}) => {
 
     return (
         <div className={s.users}>
-            <div className={s.pagesNumbersWrapper}>
-                {
-                    pages.map(p => {
-                        return <span className={`${s.pageNumber} ${p === props.currentPage ? s.selected : ""}`}
-                                      key={p}
-                                      onClick={() => props.onPageChanged(p)}>
-                                    {p}
-                                </span>
-                    })
-                }
-            </div>
+            <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize}
+                       currentPage={currentPage} onPageChanged={onPageChanged}
+            />
             {
-                props.users.map(userData => <User userData={userData}
-                                                            follow={props.follow}
-                                                            unfollow={props.unfollow}
-                                                            key={userData.id}
-                                                            isFollowingInProgress={props.followingInProgressUsersIds.some(id => id === userData.id)}
-                                                        />)
+                users.map(userData => <User userData={userData}
+                                            follow={follow}
+                                            unfollow={unfollow}
+                                            key={userData.id}
+                                            isFollowingInProgress={followingInProgressUsersIds.some(id => id === userData.id)}
+                                        />)
             }
         </div>
     )

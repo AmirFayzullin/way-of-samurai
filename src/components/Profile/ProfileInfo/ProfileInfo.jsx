@@ -4,16 +4,16 @@ import Preloader from '../../common/Preloader/Preloader';
 import userPhoto from '../../../assets/images/user.png';
 import PersonalInfo from "../PersonalInfo/PersonalInfo";
 
-const ProfileInfo = (props) => {
-    if (!props.profile) return <Preloader />;
+const ProfileInfo = ({profile, status, updateStatus}) => {
+    if (!profile) return <Preloader />;
 
     return (
         <div className={s.wrapper}>
-            <img src={props.profile.photos.large || userPhoto }
+            <img src={profile.photos.large || userPhoto }
                  className={s.avatar}
                  alt="ava"
             />
-            <PersonalInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <PersonalInfo profile={profile} status={status} updateStatus={updateStatus}/>
         </div>
     );
 };

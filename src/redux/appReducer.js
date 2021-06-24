@@ -1,11 +1,9 @@
 import {authMe} from "./authReducer";
 
-const FINISH_INITIALIZATION = 'FINISH-INITIALIZATION';
-const FAKE = 'FAKE';
+const FINISH_INITIALIZATION = 'app/FINISH-INITIALIZATION';
 
 let initialState = {
     initialized: false,
-    FAKE: 10,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -15,18 +13,12 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 initialized: true,
             };
-        case FAKE:
-            return {
-                ...state,
-                FAKE: ++state.FAKE,
-            };
         default:
             return state;
     }
 };
 
 const finishInitialization = () => ({type: FINISH_INITIALIZATION});
-export const FAKEAC = () => ({type: FAKE});
 
 export const initializeApp = () => (dispatch) => {
     let promise = dispatch(authMe());

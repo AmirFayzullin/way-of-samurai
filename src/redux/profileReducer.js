@@ -1,11 +1,11 @@
-import genID from "./genID";
+import genID from "../utils/genID";
 import {profileAPI} from "../api/api";
 
-const ADD_POST = 'ADD-POST';
-const DELETE_POST = 'DELETE-POST';
-const SET_USER_PROFILE = 'SET-USER-PROFILE';
-const TOGGLE_PROFILE_FETCHING = 'TOGGLE-PROFILE-FETCHING';
-const SET_STATUS = 'SET-STATUS';
+const ADD_POST = 'profile/ADD-POST';
+const DELETE_POST = 'profile/DELETE-POST';
+const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
+const TOGGLE_PROFILE_FETCHING = 'profile/TOGGLE-PROFILE-FETCHING';
+const SET_STATUS = 'profile/SET-STATUS';
 
 let initialState = {
     posts: [
@@ -77,28 +77,23 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const toggleProfileFetching = (isFetching) => ({type: TOGGLE_PROFILE_FETCHING, isFetching});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 
-export const requestProfile = (userId) => (dispatch) => {
+export const requestProfile = (userId) => async (dispatch) => {
     dispatch(toggleProfileFetching(true));
 
-    profileAPI.getProfile(userId)
-        .then(data => {
-            dispatch(setUserProfile(data));
-            dispatch(toggleProfileFetching(false));
-        });
+    const data = await profileAPI.getProfile(userId);
+
+    dispatch(setUserProfile(data));
+    dispatch(toggleProfileFetching(false));
 };
 
-export const requestStatus = (userId) => (dispatch) => {
-    profileAPI.getStatus(userId)
-        .then((data) => {
-            dispatch(setStatus(data))
-        });
+export const requestStatus = (userId) => async (dispatch) => {
+    const data = await profileAPI.getStatus(userId);
+
+    dispatch(setStatus(data))
 };
 
-export const updateStatus  = (status) => (dispatch) => {
-    profileAPI.updateStatus(status)
-        .then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(setStatus(status))
-            }
-        });
+export const updateStatus = (status) => async (dispatch) => {
+    const data = await profileAPI.updateStatus(status);
+
+    if (data.resultCode === 0) dispatch(setStatus(status));
 };

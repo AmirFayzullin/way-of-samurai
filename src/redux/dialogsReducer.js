@@ -1,7 +1,7 @@
-import genID from "./genID";
+import genID from "../utils/genID";
 import {reset} from 'redux-form';
 
-const SEND_MESSAGE = 'SEND-MESSAGE';
+const SEND_MESSAGE = 'dialogs/SEND-MESSAGE';
 
 let initialState = {
     dialogs: [
