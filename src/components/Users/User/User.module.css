@@ -1,6 +1,6 @@
 .user {
     display: grid;
-    grid-template: auto / 100px calc(100% - 100px);
+    grid-template: auto / 100px calc(100% - 110px);
     grid-gap: 10px;
 }
 

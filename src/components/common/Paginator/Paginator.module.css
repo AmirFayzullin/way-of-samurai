@@ -1,24 +1,45 @@
+.wrapper {
+    display: grid;
+    grid-gap: 30px;
+    grid-auto-flow: column;
+}
 
 .pagesNumbersWrapper {
     display: grid;
     grid-auto-flow: column;
-    grid-template-rows: 40px;
-    grid-auto-columns: 40px;
     grid-gap: 10px;
+}
+
+.btn {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    background: hsl(206, 63%, 54%);
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -ms-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+}
+
+.btn:hover,
+.pageNumber.selected {
+    background: hsl(206, 63%, 54%);
+}
+
+.btn.hidden {
+    opacity: 0;
+    cursor: default;
 }
 
 .pageNumber {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
-    border-radius: 10px;
     background: rgba(215, 215, 215, 0.9);
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.selected {
-    background: hsl(206, 63%, 54%);
 }

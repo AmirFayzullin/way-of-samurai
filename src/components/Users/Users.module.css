@@ -1,5 +1,6 @@
 .users {
     display: grid;
+    width: 100%;
     grid-template-columns: 100%;
     grid-auto-rows: auto;
     grid-gap: 30px;
