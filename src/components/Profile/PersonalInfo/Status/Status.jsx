@@ -5,7 +5,7 @@ const Status = (props) => {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);
 
-    const activateEditMode = () => setEditMode(true);
+    const activateEditMode = () => props.isOwner && setEditMode(true);
     const deactivateEditMode = () => {
         setEditMode(false);
         props.updateStatus(status);

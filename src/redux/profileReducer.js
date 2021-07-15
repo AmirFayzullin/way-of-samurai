@@ -6,6 +6,7 @@ const DELETE_POST = 'profile/DELETE-POST';
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const TOGGLE_PROFILE_FETCHING = 'profile/TOGGLE-PROFILE-FETCHING';
 const SET_STATUS = 'profile/SET-STATUS';
+const SET_AVATAR_SUCCESS = 'profile/SET-AVATAR-SUCCESS';
 
 let initialState = {
     posts: [
@@ -63,6 +64,15 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             };
+
+        case SET_AVATAR_SUCCESS:
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    photos: action.photos
+                }
+            };
         default:
             return state;
     }
@@ -76,6 +86,7 @@ export const deletePost = (id) => ({type: DELETE_POST, id});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const toggleProfileFetching = (isFetching) => ({type: TOGGLE_PROFILE_FETCHING, isFetching});
 export const setStatus = (status) => ({type: SET_STATUS, status});
+export const setAvatarSuccess = (photos) => ({type: SET_AVATAR_SUCCESS, photos});
 
 export const requestProfile = (userId) => async (dispatch) => {
     dispatch(toggleProfileFetching(true));
@@ -96,4 +107,11 @@ export const updateStatus = (status) => async (dispatch) => {
     const data = await profileAPI.updateStatus(status);
 
     if (data.resultCode === 0) dispatch(setStatus(status));
+};
+
+export const savePhoto = (photoFile) => async (dispatch) => {
+    const data = await profileAPI.savePhoto(photoFile);
+
+    if (data.resultCode === 0)
+        dispatch(setAvatarSuccess(data.data.photos));
 };

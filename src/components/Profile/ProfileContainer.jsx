@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
     requestProfile,
-    requestStatus,
+    requestStatus, savePhoto,
     setUserProfile,
     toggleProfileFetching,
     updateStatus
@@ -48,7 +48,9 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        return this.props.isFetchingProfile || !this.props.profile ? <Preloader /> : <Profile {...this.props}/>;
+        return this.props.isFetchingProfile || !this.props.profile ?
+            <Preloader /> :
+            <Profile {...this.props} isOwner={!this.props.match.params.userId}/>;
     }
 }
 
@@ -61,7 +63,7 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     connect(mapStateToProps,
-        {setUserProfile, toggleProfileFetching, requestProfile, requestStatus, updateStatus}
+        {setUserProfile, toggleProfileFetching, requestProfile, requestStatus, updateStatus, savePhoto}
     ),
     withRouter
 )(ProfileContainer);
