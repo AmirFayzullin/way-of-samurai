@@ -7,7 +7,7 @@ import ProfileDataForm from "./ProfileData/ProfileDataForm";
 const PersonalInfo = ({profile, status, updateStatus, isOwner, saveProfile}) => {
     const [editMode, setEditMode] = useState(false);
 
-    const onSubmitProfile = async (formData) => {
+    const onSubmitProfile = (formData) => {
         saveProfile(formData).then(() => {
             setEditMode(false);
         });
