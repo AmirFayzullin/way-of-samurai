@@ -1,14 +1,15 @@
 .wrapper {
     padding: 10px;
     display: grid;
-    grid-template: 210px / 180px auto;
+    grid-template: auto / 180px auto;
     grid-gap: 30px;
 }
 
 .avatar {
-    width: 100%;
-    height: 100%;
+    width: 180px;
+    height: 180px;
     object-fit: contain;
+    border-radius: 10px;
 }
 
 .avatarWrapper {

@@ -4,7 +4,7 @@ import Preloader from '../../common/Preloader/Preloader';
 import userPhoto from '../../../assets/images/user.png';
 import PersonalInfo from "../PersonalInfo/PersonalInfo";
 
-const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}) => {
+const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, saveProfile}) => {
     if (!profile) return <Preloader />;
 
     const onAvatarChanged = (e) => {
@@ -21,7 +21,12 @@ const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}) => {
                 />
                 { isOwner && <input type="file" onChange={onAvatarChanged}/> }
             </div>
-            <PersonalInfo isOwner={isOwner} profile={profile} status={status} updateStatus={updateStatus}/>
+            <PersonalInfo saveProfile={saveProfile}
+                          isOwner={isOwner}
+                          profile={profile}
+                          status={status}
+                          updateStatus={updateStatus}
+            />
         </div>
     );
 };

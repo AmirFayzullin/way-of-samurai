@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
     requestProfile,
-    requestStatus, savePhoto,
+    requestStatus, savePhoto, saveProfile,
     setUserProfile,
     toggleProfileFetching,
     updateStatus
@@ -63,7 +63,7 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     connect(mapStateToProps,
-        {setUserProfile, toggleProfileFetching, requestProfile, requestStatus, updateStatus, savePhoto}
+        {setUserProfile, toggleProfileFetching, requestProfile, requestStatus, updateStatus, savePhoto, saveProfile}
     ),
     withRouter
 )(ProfileContainer);

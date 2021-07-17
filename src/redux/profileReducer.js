@@ -1,5 +1,7 @@
 import genID from "../utils/genID";
 import {profileAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
+import {parseError} from '../utils/errorParser';
 
 const ADD_POST = 'profile/ADD-POST';
 const DELETE_POST = 'profile/DELETE-POST';
@@ -114,4 +116,33 @@ export const savePhoto = (photoFile) => async (dispatch) => {
 
     if (data.resultCode === 0)
         dispatch(setAvatarSuccess(data.data.photos));
+};
+
+export const saveProfile = (profileData) => async (dispatch, getState) => {
+    const data = await profileAPI.saveProfile(profileData);
+
+    if (data.resultCode === 0) {
+        const userId = getState().auth.userId;
+        return dispatch(requestProfile(userId));
+    } else {
+        const errors = data.messages.map(msg => parseError(msg.toLowerCase()));
+        let errorsObj = errors[0];
+
+        errors.forEach(error => {
+            if ('contacts' in error) {
+                errorsObj.contacts = {
+                    ...errorsObj.contacts,
+                    ...error.contacts
+                }
+            } else {
+                errorsObj = {
+                    ...errorsObj,
+                    ...error
+                }
+            }
+        });
+
+        dispatch(stopSubmit('profile-data', errorsObj));
+        return Promise.reject();
+    }
 };
