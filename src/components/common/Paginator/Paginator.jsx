@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import cn from 'classnames';
 import s from './Paginator.module.css';
 
 const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
@@ -20,7 +21,7 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
         <div className={s.wrapper}>
             <button onClick={decCurrentPortion}
                     disabled={currentPortion <= 1}
-                    className={`${s.btn} ${currentPortion > 1 ? "" : s.hidden}`}
+                    className={cn(s.btn, {[s.hidden]: currentPortion <= 1})}
             >
                 Prev
             </button>
@@ -28,7 +29,7 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
                 {
                     pages.filter((item, index) => index >= leftPortionEdge && index <= rightPortionEdge)
                         .map(p => {
-                            return <span className={`${s.pageNumber} ${s.btn} ${p === currentPage ? s.selected : ""}`}
+                            return <span className={cn(s.pageNumber, s.btn, {[s.selected]: p === currentPage})}
                                          key={p}
                                          onClick={() => onPageChanged(p)}>
                                     {p}
@@ -38,7 +39,7 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
             </div>
             <button onClick={incCurrentPortion}
                     disabled={currentPortion >= portionsCount }
-                    className={`${s.btn} ${currentPortion < portionsCount ? "" : s.hidden}`}
+                    className={cn(s.btn, {[s.hidden]: currentPortion >= portionsCount})}
             >
                 Next
             </button>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import s from './UserCard.module.css'
 import userPhoto from '../../assets/images/user.png';
 import Preloader from "../common/Preloader/Preloader";
+import cn from 'classnames';
 
 const UserCard = (props) => {
     const [isMenuOpened, toggleMenu] = useState(false);
@@ -20,7 +21,7 @@ const UserCard = (props) => {
                              alt=""
                         />
                     </div>
-                    <div className={`${s.menu} ${isMenuOpened && s.opened}`}>
+                    <div className={cn(s.menu, {[s.opened]: isMenuOpened})}>
                         <div onClick={props.logout}>Logout</div>
                     </div>
                 </>
